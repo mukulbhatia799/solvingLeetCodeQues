@@ -2,63 +2,46 @@
 #include <vector>
 using namespace std;
 
-int main() {
-    int n;
-    cin >> n;
-
-    if(n % 2 == 1) cout << -1 << endl;
-    else 
+void reverseString(int x, string& s)
+{
+    int ptr1 = 0, ptr2 = x-1;
+    string ans;
+    while(ptr1 < ptr2)
     {
-        string ans;
-        vector<vector<int>> mat(n, vector<int>(n));
-        mat[0][0] = 0;
-        int count = 1;
-        ans = ans + 'R';
-        for(int i = 0; i < n; i++)
-        {
-            int j = 0;
-            if(i % 2 == 0) 
-            {
-                for(int j = 1; j < n; j++)
-                {
-                    mat[i][j] = count % n;
-                    count++;
-                    if(j != n-1)
-                        ans = ans + 'R';
-                }
-                ans = ans + 'D';
-            }
-            else 
-            {
-                for(int j = n-1; j >= 1; j--)
-                {
-                    mat[i][j] = count % n;
-                    count++;
-                    if(j != n-1)
-                        ans = ans + 'L';
-                }
-                if(i != n-1)
-                    ans = ans + 'D';
-            }
-        }
-        ans = ans + 'L';
-        for(int i = n-1; i >= 0; i--)
-        {
-            mat[i][0] = count % n;
-            count++;
-            if(i != 0)
-            ans = ans + 'U';
-        }
-        for(int i = 0; i < n; i++)
-        {
-            for(int j = 0; j < n; j++)
-            {
-                cout << mat[i][j] << " ";
-            }
-            cout << endl;
-        }
-        cout << ans << endl;
+        swap(s[ptr1], s[ptr2]);
+        ptr1++;
+        ptr2--;
     }
+    for(int i = 0; i < s.length(); i++)
+    {
+        if(i == x) continue;
+        ans = ans + s[i];
+    }
+    cout << "ans: " << ans << endl;
+    s = ans;
+}
+string finalString(string s) {
+    int counti = 0;
+    for(int i = 0; i < s.length(); i++)
+    {
+        if(s[i] == 'i')
+        {
+            counti++;
+            reverseString(i, s);
+            i--;
+        }
+    }
+    string ans;
+    for(int i = 0; i < s.length(); i++)
+    {
+        ans = ans + s[i];
+    }
+    return ans;
+}
+
+int main() {
+    string s = "string";
+    cout << finalString(s);
 
 	return 0;
 }
