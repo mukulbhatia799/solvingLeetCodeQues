@@ -1,47 +1,35 @@
-#include <iostream>
-#include <vector>
+// 5 per product
+
+// 10 
+
+
+#include<iostream>
 using namespace std;
 
-void reverseString(int x, string& s)
+class salesperson
 {
-    int ptr1 = 0, ptr2 = x-1;
-    string ans;
-    while(ptr1 < ptr2)
+    int commbefore200 = 5;
+    int commafter200 = 10;
+public:
+    void commissionofsp(int nop, int* am)
     {
-        swap(s[ptr1], s[ptr2]);
-        ptr1++;
-        ptr2--;
-    }
-    for(int i = 0; i < s.length(); i++)
-    {
-        if(i == x) continue;
-        ans = ans + s[i];
-    }
-    cout << "ans: " << ans << endl;
-    s = ans;
-}
-string finalString(string s) {
-    int counti = 0;
-    for(int i = 0; i < s.length(); i++)
-    {
-        if(s[i] == 'i')
-        {
-            counti++;
-            reverseString(i, s);
-            i--;
+        if(nop <= 200) *am = nop*commbefore200;
+        else {
+            int x = nop-200;
+            *am = 200*commbefore200;
+            *am += x*commafter200;
         }
     }
-    string ans;
-    for(int i = 0; i < s.length(); i++)
-    {
-        ans = ans + s[i];
-    }
-    return ans;
-}
+};
 
-int main() {
-    string s = "string";
-    cout << finalString(s);
+int main(){
+    salesperson sp;
+    int noofproduct;
+    cout << "Enter how much product you want to buy: ";
+    cin >> noofproduct;
+    int amount = 0;
+    sp.commissionofsp(noofproduct, &amount);
+    cout << "Your amount for " << noofproduct << " products is " << amount << ".";
 
-	return 0;
+    return 0;
 }
