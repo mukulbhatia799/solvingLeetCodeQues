@@ -11,13 +11,16 @@ class salesperson
     int commbefore200 = 5;
     int commafter200 = 10;
 public:
-    void commissionofsp(int nop, int* am)
+    void commissionofsp(int nop, int* am)   
     {
-        if(nop <= 200) *am = nop*commbefore200;
+        if(nop <= 200)  // nop = 250
+        {
+            *am = nop*commbefore200;
+        }
         else {
             int x = nop-200;
             *am = 200*commbefore200;
-            *am += x*commafter200;
+            *am = *am + x*commafter200;
         }
     }
 };
