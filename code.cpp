@@ -1,17 +1,21 @@
 #include<iostream>
 using namespace std;
 
-void printFibUptoN(int n, int a, int b)
+void printNumbers(int n, string str[])
 {
     if(n == 0) return;
-    int c = a + b;
-    cout << c << " ";
-    printFibUptoN(--n, b, c);
+    int mod = n % 10;
+    cout << str[mod] << " ";
+    printNumbers(n/10, str);
 }
 
 int main(){
-    cout << 0 << " " << 1 << " ";
-    printFibUptoN(10, 0, 1);
+    int n;
+    cin >> n;
+
+    string s[10] = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+
+    printNumbers(n, s);
 
     return 0;
 }
