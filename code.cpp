@@ -1,16 +1,17 @@
 #include<iostream>
 using namespace std;
 
-void rec(int n)
+void printFibUptoN(int n, int a, int b)
 {
-    if(n == 0) return ;
-    cout << n << endl;
-    rec(--n);
-    cout << n << endl;
+    if(n == 0) return;
+    int c = a + b;
+    cout << c << " ";
+    printFibUptoN(--n, b, c);
 }
 
 int main(){
-    rec(10);
+    cout << 0 << " " << 1 << " ";
+    printFibUptoN(10, 0, 1);
 
     return 0;
 }
