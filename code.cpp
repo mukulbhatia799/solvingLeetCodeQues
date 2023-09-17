@@ -21,13 +21,6 @@ int minimumRightShifts(vector<int>& nums) {
     }
 
 int main(){
-    map<int, int> mp;
-    mp[5] = 2;
-    mp[4] = 3;
-
-    auto it = mp.begin();
-    cout << it << endl;
-
 
     return 0;
 }
