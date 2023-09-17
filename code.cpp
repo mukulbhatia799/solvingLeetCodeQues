@@ -1,21 +1,33 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
-void printNumbers(int n, string str[])
-{
-    if(n == 0) return;
-    int mod = n % 10;
-    cout << str[mod] << " ";
-    printNumbers(n/10, str);
-}
+int minimumRightShifts(vector<int>& nums) {
+        int check = -1;
+        for(int i = 0; i < nums.size()-1; i++)
+        {
+            if(nums[i] > nums[i+1]) {
+                check = i;
+                break;
+            }
+        }
+        if(check == -1) return 0;
+        for(int i = check+1; i < nums.size()-1; i++)
+        {
+            if(nums[i] > nums[i+1]) return -1;
+        }
+        if(nums[0] < nums[nums.size()-1]) return -1;
+        cout << "check: " << check << endl;
+        return nums.size()-check-1;
+    }
 
 int main(){
-    int n;
-    cin >> n;
+    map<int, int> mp;
+    mp[5] = 2;
+    mp[4] = 3;
 
-    string s[10] = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+    auto it = mp.begin();
+    cout << it << endl;
 
-    printNumbers(n, s);
 
     return 0;
 }
