@@ -1,1 +1,1 @@
-# solvingQues
+# solving Competitive question.
