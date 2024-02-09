@@ -1,71 +1,160 @@
-#include<iostream>
+// sum of a two LL.
+
+#include <iostream>
+#include <vector>
 using namespace std;
 
-int main(){
-    int n;
-    cin >> n;
+class Node
+{
+    int data;
+    Node *next;
 
-    int count100 = 0, count50 = 0, count20 = 0, count1 = 0;
-    // while(n)
-    // {
-    //     if(n / 100 != 0)
-    //     {
-    //         count100 += n / 100;
-    //         n -= 100*(n/100);
-    //     }
-    //     else if(n / 50 != 0)
-    //     {
-    //         count50 += n / 50;
-    //         n -= 50*(n/50);
-    //     }
-    //     else if(n / 20 != 0)
-    //     {
-    //         count20 += n / 20;
-    //         n -= 20*(n/20);
-    //     }
-    //     else {
-    //         count1 += n;
-    //         n = 0;
-    //     }
-    // }
-
-    while(n)
+public:
+    Node()
     {
-        int noofnotes = 0, token;
-        if(n / 100 != 0) token = 100;
-        else if(n / 50 != 0) token = 50;
-        else if(n / 20 != 0) token = 20;
-        else token = 1;
-        switch (token)
+        this->data = 0;
+        this->next = NULL;
+    }
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+    void create(int num, Node *&head1)
+    {
+        int x = num;
+        while (x)
         {
-            case 100:
-                noofnotes = n/100;
-                n -= 100*noofnotes;
-                cout << "There are " << noofnotes << " of 100." << endl;
-                break;
-            
-            case 50:
-                noofnotes = n/50;
-                n -= 50*(n/50);
-                cout << "There are " << noofnotes << " of 50." << endl;
-                break;
-            
-            case 20:
-                noofnotes = n/20;
-                n -= 20*(n/20);
-                cout << "There are " << noofnotes << " of 20." << endl;
-                break;
-
-            case 1:
-                noofnotes = n;
-                n = 0;
-                cout << "There are " << noofnotes << " of 1." << endl;
-                break;
-            
-            default:
-                break;
+            int mod = x % 10;
+            x = x / 10;
+            Node *newnode = new Node(mod);
+            if (head1 == NULL)
+            {
+                head1 = newnode;
+            }
+            else
+            {
+                newnode->next = head1;
+                head1 = newnode;
+            }
         }
     }
+    void display(Node *head)
+    {
+        cout << "Displaying LL: ";
+        Node *temp = head;
+        while (temp)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+    Node *findSumOfLL(Node *head1, Node *head2)
+    {
+        Node *newhead = NULL;
+        vector<int> vec1;
+        vector<int> vec2;
+
+        Node *temp = head1;
+        while (temp)
+        {
+            vec1.push_back(temp->data);
+            temp = temp->next;
+        }
+        cout << "vec1: ";
+        for (auto ele : vec1)
+        {
+            cout << ele << " ";
+        }
+        cout << endl;
+        temp = head2;
+        while (temp)
+        {
+            vec2.push_back(temp->data);
+            temp = temp->next;
+        }
+        cout << "vec2: ";
+        for (auto ele : vec2)
+        {
+            cout << ele << " ";
+        }
+        cout << endl;
+
+        int i = vec1.size() - 1, j = vec2.size() - 1;
+        int carry = 0;
+        while (i >= 0 && j >= 0)
+        {
+            int sum = vec1[i] + vec2[j] + carry;
+
+            cout << "sum: " << sum << endl;
+            int mod = sum % 10;
+            carry = sum / 10;
+            Node *newnode = new Node(mod);
+            if (newhead == NULL)
+            {
+                newhead = newnode;
+            }
+            else
+            {
+                newnode->next = newhead;
+                newhead = newnode;
+            }
+            i--;
+            j--;
+        }
+
+        while (i >= 0)
+        {
+            int sum = vec1[i--] + carry;
+            int mod = sum % 10;
+            carry = sum / 10;
+            Node *newnode = new Node(mod);
+            newnode->next = newhead;
+            newhead = newnode;
+        }
+        while (j >= 0)
+        {
+            int sum = vec2[j--] + carry;
+            int mod = sum % 10;
+            carry = sum / 10;
+            Node *newnode = new Node(mod);
+            carry = 0;
+            newnode->next = newhead;
+            newhead = newnode;
+        }
+        if (carry)
+        {
+            Node *newnode = new Node(carry);
+            carry = 0;
+            newnode->next = newhead;
+            newhead = newnode;
+        }
+
+        return newhead;
+    }
+};
+
+int main()
+{
+    int num1 = 10040;
+    int num2 = 104;
+
+    Node sumofll;
+
+    Node *head1 = NULL;
+    sumofll.create(num1, head1);
+    sumofll.display(head1);
+
+    Node *head2 = NULL;
+    sumofll.create(num2, head2);
+    sumofll.display(head2);
+
+    cout << "Finding sum of two LL." << endl;
+
+    Node *newhead = sumofll.findSumOfLL(head1, head2);
+
+    sumofll.display(newhead);
 
     return 0;
 }
