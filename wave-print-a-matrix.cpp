@@ -31,11 +31,25 @@ int main()
         }
     }
 
-    cout << "Output: ";
+    cout << "Output: column-wise: ";
     for(auto val: ans) {
         cout << val << " ";
     }
     cout << endl;
+
+
+
+    // row-wise output
+    for(int row = 0; row < n; row++) {
+        if(row & 1) {
+            // for odd row
+
+        }
+        else {
+            // for even row
+            
+        }
+    }
 
     return 0;
 }
