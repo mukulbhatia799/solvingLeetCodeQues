@@ -13,8 +13,7 @@ int main()
     };
 
     vector<int> ans;
-    int col = 0;
-    while(col < m)
+    for(int col = 0; col < m; col++)
     {
         if(col & 1) {
             // odd -> bottom to top;
@@ -30,7 +29,6 @@ int main()
                 ans.push_back(arr[i][col]);
             }
         }
-        col++;
     }
 
     cout << "Output: ";
