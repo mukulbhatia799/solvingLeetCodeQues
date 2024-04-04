@@ -57,7 +57,7 @@
 #include <algorithm>
 using namespace std;
 
-void nextPermutation(vector<int>& arr) {
+void nextPermutation(vector<int>& arr) {        // solved using two pointers.
         int n = arr.size();
         int i, j;
         for (i = n - 2; i >= 0; i--)
