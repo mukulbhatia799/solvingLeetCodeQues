@@ -2,18 +2,16 @@ class Solution {
 public:
     string reverseWords(string s) {
         string str = "", answer = "";
-        for(int i = 0; i < s.length(); i++) {
+        for(int i = s.length()-1; i >= 0; i--) {
             if(s[i] == ' ') {
-                reverse(str.begin(), str.end());
                 if(answer == "") answer = str;
-                else answer = answer + " " + str;
+                else answer = str + " " + answer;
                 str = "";
             }
             else str.push_back(s[i]);
         }
-        reverse(str.begin(), str.end());
         if(answer == "") answer = str;
-        else answer = answer + " " + str;
+        else answer = str + " " + answer;
         return answer;
     }
 };
