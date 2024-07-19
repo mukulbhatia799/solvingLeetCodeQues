@@ -11,23 +11,19 @@
  */
 class Solution {
 public:
-    void findAns(TreeNode* root, vector<int>& store) {
+    void findAns(TreeNode* root, TreeNode* &root2) {
         if(!root) return ;
 
-        findAns(root->left, store);
-        store.push_back(root->val);
-        findAns(root->right, store);
-    }
-    TreeNode* createNewTree(int i, vector<int>& store) {
-        if(i == store.size()) return NULL;
-        TreeNode* newnode = new TreeNode(store[i]);
-        newnode->left = NULL;
-        newnode->right = createNewTree(i+1, store);
-        return newnode;
+        findAns(root->left, root2);
+        TreeNode* newnode = new TreeNode(root->val);
+        root2->right = newnode;
+        root2 = newnode;
+        findAns(root->right, root2);
     }
     TreeNode* increasingBST(TreeNode* root) {
-        vector<int> store;
-        findAns(root, store);
-        return createNewTree(0, store);
+        TreeNode* root2 = new TreeNode();
+        TreeNode* temp = root2;
+        findAns(root, root2);
+        return temp->right;
     }
 };
