@@ -12,7 +12,8 @@
 class Solution {
 public:
     TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
-        if(!root1 && !root2) return NULL;
+        if(!root1 && !root2) 
+            return NULL;
 
         int val1 = root1 ? root1->val : 0;
         int val2 = root2 ? root2->val : 0;
