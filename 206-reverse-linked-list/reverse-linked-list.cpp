@@ -10,16 +10,20 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        ListNode* prev = NULL; ListNode* curr = head;
-        while(curr) {
-            ListNode* nxt = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = nxt;
+    void findAns(ListNode* &head, ListNode* prev, ListNode* curr) {
+        if(curr == NULL) {
+            head = prev;
+
+            return ;
         }
+        cout << curr->val << " ";
+        findAns(head, curr, curr->next);
+        curr->next = prev;
+        if(prev) prev->next = NULL;
+    }
+    ListNode* reverseList(ListNode* head) {
+        findAns(head, NULL, head);
 
-        return prev;
-
+        return head;
     }
 };
