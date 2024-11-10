@@ -2,21 +2,11 @@ class Solution {
 public:
     void findNbrs(map<int, vector<int>> &mp, int visited[], int city) {
 
-        queue<int> q;
-        q.push(city);
-
-        while(!q.empty()) {
-            int n = q.front();
-            if(visited[n] == 0) {
-                visited[n] = 1;
-            }
-            q.pop();
-
-            for(int val: mp[n]) {
-                if(visited[val] == 0) {
-                    visited[val] = 1;
-                    q.push(val);
-                }
+        // dfs
+        for(int c: mp[city]) {
+            if(visited[c] == 0) {
+                visited[c] = 1;
+                findNbrs(mp, visited, c);
             }
         }
     }
@@ -46,6 +36,7 @@ public:
         for(int i = 0; i < n; i++) {
             if(visited[i] == 0) {
                 ans++;
+                visited[i] = 1;
                 findNbrs(mp, visited, i);
             }
         }
