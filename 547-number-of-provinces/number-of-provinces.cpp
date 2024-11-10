@@ -27,7 +27,6 @@ public:
     }
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
-        int ans = 0;
         map<int, vector<int>> mp;
 
         for(int i = 0; i < n; i++) {
@@ -47,10 +46,12 @@ public:
         }
 
         int visited[n];
+        int ans = 0;
         for(int i = 0; i < n; i++) visited[i] = 0;
         for(int i = 0; i < n; i++) {
             if(visited[i] == 0) {
-                if(findNbrs(mp, visited, i)) ans++;
+                ans++;
+                findNbrs(mp, visited, i);
             }
         }
 
