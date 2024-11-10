@@ -1,29 +1,24 @@
 class Solution {
 public:
-    bool findNbrs(map<int, vector<int>> &mp, int visited[], int city) {
+    void findNbrs(map<int, vector<int>> &mp, int visited[], int city) {
 
         queue<int> q;
         q.push(city);
 
-        bool check = false;
         while(!q.empty()) {
             int n = q.front();
             if(visited[n] == 0) {
                 visited[n] = 1;
-                check = true;
             }
             q.pop();
 
             for(int val: mp[n]) {
                 if(visited[val] == 0) {
-                    check = true;
                     visited[val] = 1;
                     q.push(val);
                 }
             }
         }
-
-        return check;
     }
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
@@ -38,12 +33,12 @@ public:
             }
         }
 
-        cout << "print" << endl;
-        for(auto vec: mp) {
-            cout << vec.first << " : ";
-            for(int val: vec.second) cout << val << " ";
-            cout << endl;
-        }
+        // cout << "print" << endl;
+        // for(auto vec: mp) {
+        //     cout << vec.first << " : ";
+        //     for(int val: vec.second) cout << val << " ";
+        //     cout << endl;
+        // }
 
         int visited[n];
         int ans = 0;
