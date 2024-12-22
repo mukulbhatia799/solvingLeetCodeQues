@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
-        int arr[1001];
+        unordered_map<int, int> arr;
         for(int i = 0; i < 1001; i++) arr[i] = 0;
 
         for(int i = 0; i < nums1.size(); i++) {
