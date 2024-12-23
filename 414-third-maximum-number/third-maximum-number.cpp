@@ -7,18 +7,17 @@ public:
         }
         return true;
     }
+
     int thirdMax(vector<int>& nums) {
         priority_queue<int, vector<int>, greater<int>> pq;
-        int maxi = INT_MIN;
+        int maxi = INT_MIN, i = 0;
 
-        int size = (nums.size() > 3) ? 3 : nums.size();
-        int i = 0;
         while(pq.size() != 3 && i < nums.size()) {
             maxi = max(maxi, nums[i]);
             if(findPq(pq, nums[i])) pq.push(nums[i]);
             i++;
         }
-        
+
         while(i < nums.size()) {
             maxi = max(maxi, nums[i]);
             if(nums[i] > pq.top() && findPq(pq, nums[i])) {
