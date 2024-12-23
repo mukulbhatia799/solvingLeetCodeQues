@@ -1,20 +1,37 @@
 class Solution {
 public:
+    bool findPq(priority_queue<int, vector<int>, greater<int>> pq, int val) {
+        while(!pq.empty()) {
+            if(pq.top() == val) return false;
+            pq.pop();
+        }
+        return true;
+    }
     int thirdMax(vector<int>& nums) {
-        map<int, int, greater<int>> mp;
-
+        priority_queue<int, vector<int>, greater<int>> pq;
         int maxi = INT_MIN;
-        for(auto val: nums) {
-            mp[val]++;
-            maxi = max(maxi, val);
+
+        int size = (nums.size() > 3) ? 3 : nums.size();
+        int i = 0;
+        while(pq.size() != 3 && i < nums.size()) {
+            maxi = max(maxi, nums[i]);
+            if(findPq(pq, nums[i])) pq.push(nums[i]);
+            i++;
         }
         
-        int ptr = 3;
-        for(auto it: mp) {
-            ptr--;
-            if(ptr == 0) return it.first;
+        while(i < nums.size()) {
+            maxi = max(maxi, nums[i]);
+            if(nums[i] > pq.top() && findPq(pq, nums[i])) {
+                pq.pop();
+                pq.push(nums[i]);
+            }
+            i++;
         }
 
-        return maxi;
+        if(pq.size() < 3) return maxi;
+
+        return pq.top();
+
+        
     }
 };
