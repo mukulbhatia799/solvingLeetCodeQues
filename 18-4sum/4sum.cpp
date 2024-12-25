@@ -16,8 +16,7 @@ public:
 
                 while(k < m) {
                     long long int sum = nums[i] + nums[j];
-                    sum += nums[k];
-                    sum += nums[m];
+                    sum += nums[k] + nums[m];
                     
                     if(sum == target) {
                         ans.push_back({nums[i], nums[j], nums[k], nums[m]});
