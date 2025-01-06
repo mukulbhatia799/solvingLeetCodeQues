@@ -1,16 +1,24 @@
 class Solution {
 public:
     vector<int> minOperations(string boxes) {
-        int n = boxes.size(); 
+        int n = boxes.size();
 
-        vector<int> ans(n, 0);
+        vector<int> fromLeft(n, 0), ans(n, 0);
+        int  count1 = 0, value = 0;
         for(int i = 0; i < n; i++) {
-            int count = 0;
-            for(int j = 0; j < n; j++) {
-                if(boxes[j] == '1') count += abs(j-i);
-            }
-            ans[i] = count;
+            fromLeft[i] = value;
+            if(boxes[i] == '1') count1++;
+            value += count1;
         }
+
+        count1 = 0;
+        value = 0;
+        for(int i = n-1; i >= 0; i--) {
+            ans[i] = value + fromLeft[i];
+            if(boxes[i] == '1') count1++;
+            value += count1;
+        }
+
         return ans;
     }
 };
