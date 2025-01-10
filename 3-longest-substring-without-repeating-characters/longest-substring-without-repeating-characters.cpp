@@ -8,16 +8,14 @@ public:
 
         while(j < n) {
             auto it = mp.find(s[j]);
-            if(it != mp.end()) {
-                while(i < j && s[i] != s[j]) {
-                    mp.erase(s[i++]);
-                }
-                i++;
+
+            if(it != mp.end() && it->second >= i) {
+                i = it->second+1;
                 count = j-i+1;
             }
             else count++;
+            mp[s[j]] = j;
             ans = max(ans, count);
-            mp[s[j]]++;
             j++;
         }
 
