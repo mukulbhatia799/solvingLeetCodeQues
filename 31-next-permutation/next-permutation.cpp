@@ -14,6 +14,6 @@ public:
             }
         }
 
-        sort(nums.begin(), nums.end());
+        reverse(nums.begin(), nums.end());
     }
 };
