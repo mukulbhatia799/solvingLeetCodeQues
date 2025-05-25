@@ -27,10 +27,10 @@ public:
 
         sort(vpp.begin(), vpp.end());
 
-        cout << "after sorting" << endl;
-        for(auto pr: vpp) {
-            cout << pr.first << " " << pr.second.first << " " << pr.second.second << endl;
-        }
+        // cout << "after sorting" << endl;
+        // for(auto pr: vpp) {
+        //     cout << pr.first << " " << pr.second.first << " " << pr.second.second << endl;
+        // }
 
         for(int i = 0; i < vpp.size(); i++) {
             int col = vpp[i].first;
