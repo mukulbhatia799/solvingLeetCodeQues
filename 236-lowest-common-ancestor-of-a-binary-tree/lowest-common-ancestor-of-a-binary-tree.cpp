@@ -9,39 +9,25 @@
  */
 class Solution {
 public:
-    void findAns(TreeNode* root, TreeNode* p, TreeNode* q, vector<TreeNode*> &ppath, vector<TreeNode*> &qpath, bool& pfound, bool& qfound) {
-        if(!root) return ;
+    TreeNode* findAns(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(!root) return NULL;
 
-        if(!pfound) ppath.push_back(root);
-        if(!qfound) qpath.push_back(root);
-        if(!pfound && root->val == p->val) {
-            pfound = true;
-        }
-        else if(!qfound && root->val == q->val) {
-            qfound = true;
-        }
+        TreeNode* leftSub = findAns(root->left, p, q);
+        TreeNode* rightSub = findAns(root->right, p, q);
 
-        findAns(root->left, p, q, ppath, qpath, pfound, qfound);
-        findAns(root->right, p, q, ppath, qpath, pfound, qfound);
-        if(!pfound) ppath.pop_back();
-        if(!qfound) qpath.pop_back();
+        if(leftSub && rightSub) {
+            return root;
+        }
+        else if(root->val == p->val || root->val == q->val) {
+            return root;
+        }
+        else if(leftSub || rightSub) {
+            return (leftSub ? leftSub:rightSub);
+        }
+        else return NULL;
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        // Method 1: find path of both p and q nodes and store in diff vector. start comparing them from the starting. If at some point both comparisons mismatch, the last matched node will be the LCA of p and q.
-        vector<TreeNode*> ppath;
-        vector<TreeNode*> qpath;
-
-        bool pfound = false, qfound = false;
-        findAns(root, p, q, ppath, qpath, pfound, qfound);
-        int i = 0, j = 0;
-        TreeNode* lastCommonNode = NULL;
-        while(i < ppath.size() && j < qpath.size()) {
-            if(ppath[i] == qpath[j]) {
-                lastCommonNode = ppath[i];
-            }
-            else break;
-            i++; j++;
-        }
-        return lastCommonNode;
+        // Method 2: After checking the left and right substree of a node, check if leftsubtree or rightsubtree return the non-null value or not. If both left and right subtree returns then the current node is the answer node, else if one of the side returns means the either the second node is not found or both the nodes were on same path and the node above the lower node is the answer node.
+        return findAns(root, p, q);
     }
 };
