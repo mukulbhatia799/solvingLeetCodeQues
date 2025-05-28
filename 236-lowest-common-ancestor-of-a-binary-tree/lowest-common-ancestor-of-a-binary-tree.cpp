@@ -33,16 +33,6 @@ public:
 
         bool pfound = false, qfound = false;
         findAns(root, p, q, ppath, qpath, pfound, qfound);
-        cout << "p path: ";
-        for(auto node: ppath) {
-            cout << node->val << "->";
-        }
-        cout << endl;
-        cout << "q path: ";
-        for(auto node: qpath) {
-            cout << node->val << "->";
-        }
-        cout << endl;
         int i = 0, j = 0;
         TreeNode* lastCommonNode = NULL;
         while(i < ppath.size() && j < qpath.size()) {
